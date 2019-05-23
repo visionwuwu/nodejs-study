@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <style>
+        table{
+            width: 500px;
+            border-collapse: collapse;
+        }
+        caption{
+            border-bottom: 2px #000 solid;
+            color: #000;
+            font-size: 18px;
+            text-align: center;
+        }
+        td{
+            border: 1px solid #000;
+            height: 50px;
+            text-indent: 25px;
+            position: relative;
+        }
+        tr>td:first-of-type:before{
+            font-family: 'Glyphicons Halflings';
+            content: "\e022";
+            position: absolute;
+            font-size: 20px;
+            left: -25px;
+            top: 12px;
+            color: rgb(255,231,147);
+        }
+    </style>
+    <title>{{ title }}</title>
+</head>
+<body>
+    <table>
+        <caption>D:\黑马\nodejs\nodejs复习\www</caption>
+        <tbody>
+        {{ each names}}
+            <tr>
+                <td><a href="D:\\黑马\\nodejs\\nodejs复习\\www">{{ $value }}</a></td>
+                <td>{{ describe }}</td>
+                <td>2017/11/2 上午10:32:47</td>
+            </tr>
+        {{ /each }}
+        </tbody>
+    </table>
+</body>
+</html>
