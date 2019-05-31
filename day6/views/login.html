@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="/public/css/login.css">
+</head>
+
+<body>
+  <div class="main">
+    <div class="header">
+      <a href="/">
+        <img src="/public/img/logo3.png" alt="">
+      </a>
+      <h1>用户登录</h1>
+    </div>
+    <form id="login_form">
+      <h1>{{ status && status}}</h1>
+      <div class="form-group">
+        <label for="">邮箱</label>
+        <input type="email" class="form-control" id="" name="email" placeholder="Email" autofocus pattern="^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$">
+      </div>
+      <div class="form-group">
+        <label for="">密码</label>
+        <a class="pull-right" href="">忘记密码？</a>
+        <input type="password" class="form-control" id="" name="password" placeholder="Password" minlength="6">
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox">记住我
+        </label>
+      </div>
+      <button type="submit" class="btn btn-success btn-block">登录</button>
+    </form>
+    <div class="message">
+      <p>没有账号? <a href="/register">点击创建</a>.</p>
+    </div>
+  </div>
+  <script src="/node_modules/jquery/dist/jquery.js"></script>
+  <script type="text/javascript" src="/public/js/commns.js" ></script>
+  <script>
+      $(function ($) {
+          $('[type = "submit"]').on('click', function (e) {
+              // 阻止表单默认行为
+
+              e.preventDefault()
+
+              // 获取表单序列化的数据
+
+              var user = $('#login_form').serialize()
+
+              console.log(user)
+
+              // 发送就、ajax请求提交数据到服务端
+
+              registerPost({
+                  type: 'post',
+                  url: '/login',
+                  data: user,
+                  dataType: 'json',
+                  success: function (res) {
+                      callback && callbakc(res)
+                  }
+              }, function (res) {
+                  console.log(res)
+                  if (res.err_code === 500) {
+
+                    return window.alert('用户名或密码错误')
+
+                  }
+
+                  // 登录成功跳转到首页
+                  if (res.err_code === 200) {
+
+                    return location.href = '/'
+
+                  }
+
+              })
+
+          })
+      })
+  </script>
+</body>
+
+</html>
